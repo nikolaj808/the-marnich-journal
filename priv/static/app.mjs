@@ -1954,13 +1954,6 @@ var Decrement = class extends CustomType {
 function init2(_) {
   return 0;
 }
-function update(model, msg) {
-  if (msg instanceof Increment) {
-    return model + 1;
-  } else {
-    return model - 1;
-  }
-}
 function view(model) {
   let count = to_string(model);
   return div(
@@ -1977,6 +1970,16 @@ function view(model) {
       )
     ])
   );
+}
+function convert_leaderboard(records, otherstuff) {
+  return records * otherstuff;
+}
+function update(model, msg) {
+  if (msg instanceof Increment) {
+    return model + convert_leaderboard(1, 2);
+  } else {
+    return model - 1;
+  }
 }
 function main() {
   let app = simple(init2, update, view);
