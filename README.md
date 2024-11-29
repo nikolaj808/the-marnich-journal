@@ -3,5 +3,5 @@
 ## Development
 
 ```sh
-gleam run   # Run the project
+gleam run -m lustre/dev start   # Run the project in watch mode
 ```
