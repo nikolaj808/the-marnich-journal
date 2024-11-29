@@ -26,9 +26,15 @@ pub fn get_sorted_users(submitted_record: record.Record){
 pub fn score_users(users: List(user.User)) -> List(Tuple(user.User, Int)) {
   let n = List.length(users)
 
+  // Assign points based on the position of each user
   List.indexed_map(users, fn(index, user) {
-    let score = n - index
-    Tuple(user, score)
+    case index {
+      0 -> Tuple(user, min(4, n))   // 1st user gets max 4 points
+      1 -> Tuple(user, min(3, n - 1)) // 2nd user gets max 3 points
+      2 -> Tuple(user, min(2, n - 2)) // 3rd user gets max 2 points
+      3 -> Tuple(user, min(1, n - 3)) // 4th user gets max 1 point
+      _ -> Tuple(user, 0)             // All other users get 0 points
+    }
   })
 }
 
