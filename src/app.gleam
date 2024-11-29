@@ -3,13 +3,20 @@ import gleam/erlang/process
 import gleam/http/request.{type Request}
 import gleam/http/response.{type Response}
 import mist.{type Connection, type ResponseData}
+import radiate
+import gleam/io
 import home_page.{home_page}
 import details_page.{details_page}
 
 pub fn main() {
   let empty_body = mist.Bytes(bytes_builder.new())
   let not_found = response.set_body(response.new(404), empty_body)
-
+  let _ = radiate.new()
+    |> radiate.add_dir("src")
+    |> radiate.on_reload(fn (_state, path) {
+      io.println("Change in " <> path <> ", reloading!")
+    })
+    |> radiate.start()
   let assert Ok(_) =
     fn(req: Request(Connection)) -> Response(ResponseData) {
       case request.path_segments(req) {

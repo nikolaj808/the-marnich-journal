@@ -10,8 +10,8 @@ pub fn home_page() -> Response(ResponseData) {
     html([], [
       html.head([], [html.title([], "Home")]),
       html.body([], [
-        html.h1([], [html.text("Welcome!")]),
-        html.p([], [html.text("Hello, world!")])
+        html.h1([], [html.text("The Marnich record book for records")]),
+        html.p([], [html.text("Here you can see all the current records submitted and add your own!")]),
       ])
     ])
 
